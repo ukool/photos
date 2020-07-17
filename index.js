@@ -1,6 +1,9 @@
 const TelegramBot = require('node-telegram-bot-api'); // подключаем node-telegram-bot-api
 const token = '1280963906:AAFolefiCW9sKRAv9ozbn-kutwmb0siGCd8';
 
+const { photosProcessMessage } = require('./photo.js');
+const { textProcessMessage } = require('./text.js');
+
 //конфиг клавиатуры
 const keyboard = [
   [
@@ -28,13 +31,11 @@ const bot = new TelegramBot(token, {polling: true});
 // обработчик события присылания нам любого сообщения
 bot.on('message', (msg) => {
   const chatId = msg.chat.id; //получаем идентификатор диалога, чтобы отвечать именно тому пользователю, который нам что-то прислал
-
-  // отправляем сообщение
-  bot.sendMessage(chatId, 'Привет, Друг! чего хочешь?', { // прикрутим клаву
-    reply_markup: {
-      inline_keyboard: keyboard
-    }
-  });
+  if (msg.photo && msg.photo.length) {
+    photosProcessMessage(bot, msg);
+  } else if (msg.text) {
+    textProcessMessage(bot, msg);
+  }
 });
 
 // обработчик событий нажатий на клавиатуру
