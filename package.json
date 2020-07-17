@@ -9,6 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "node-telegram-bot-api": "0.50.0"
+    "needle": "^2.5.0",
+    "node-telegram-bot-api": "0.50.0",
+    "sharp": "^0.25.4"
   }
 }

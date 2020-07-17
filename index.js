@@ -31,11 +31,12 @@ const bot = new TelegramBot(token, {polling: true});
 // обработчик события присылания нам любого сообщения
 bot.on('message', (msg) => {
   const chatId = msg.chat.id; //получаем идентификатор диалога, чтобы отвечать именно тому пользователю, который нам что-то прислал
-  if (msg.photo && msg.photo.length) {
-    photosProcessMessage(bot, msg);
-  } else if (msg.text) {
-    textProcessMessage(bot, msg);
-  }
+  photosProcessMessage(bot, msg);
+
+  // if (msg.photo && msg.photo[0]) {
+  // } else if (msg.text) {
+  //   textProcessMessage(bot, msg);
+  // }
 });
 
 // обработчик событий нажатий на клавиатуру
